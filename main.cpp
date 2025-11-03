@@ -125,7 +125,7 @@ int main() {
                 break;
             case UNIQUE_NAMES:
                 cout << "Removing all goats with duplicate names. \n";
-                //unique_names(trip);
+                unique_names(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -401,5 +401,14 @@ void retire_goats(list<Goat> &trip) {
     trip.erase(remove_if(trip.begin(), trip.end(), [retirementAge](Goat goat) { return goat.get_age() >= retirementAge; }), trip.end());
 }
 
-//removes all goats with duplicated names using std::unique
-//void unique_names(list<Goat> &trip);
+/**
+ * Removes all goats with duplicated names using std::unique
+ * @param trip List of goats
+ */
+void unique_names(list<Goat> &trip) {
+    //return if list is empty
+    if (trip.empty()) { cout << "No goats to remove" << endl; return; }
+
+    //Remove duplicates using erase and unique with function that checks if goats have the same name
+    trip.erase(unique(trip.begin(), trip.end(), [](Goat goat1, Goat goat2) { return goat1.get_name() == goat2.get_name(); }), trip.end());
+}
