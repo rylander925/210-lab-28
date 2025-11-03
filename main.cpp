@@ -4,6 +4,7 @@ IDE Used: Visual Studio Code
 */
 
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <list>
@@ -20,7 +21,7 @@ void display_trip(list<Goat> trip);
 int main_menu();
 
 //add new goats by creating a new list and merging with existing list, using std::merge
-void add_multiple(list<Goat> &trip, int num);
+void add_multiple(list<Goat> &trip, string[] names, string[] colors);
 
 //sort goats by age using std::sort
 void sort_age(list<Goat> &trip);
@@ -43,8 +44,8 @@ void retire_goats(list<Goat> &trip);
 //removes all goats with duplicated names using std::unique
 void unique_names(list<Goat> &trip);
 
-int validateInput(int min, int max, string prompt);
-int validateInput(int min, string prompt);
+int validate_input(int min, int max, string prompt);
+int validate_input(int min, string prompt);
 
 int main() {
     srand(time(0));
@@ -208,7 +209,7 @@ int select_goat(list<Goat> trp) {
  * @param max Maximum range of integers to accept (inclusive)
  * @return Integer in the range of min, max inclusive
  */
-int validateInput(int min, int max, string prompt) {
+int validate_input(int min, int max, string prompt) {
     int input;
     do {
         cout << prompt << endl;
@@ -233,7 +234,7 @@ int validateInput(int min, int max, string prompt) {
  * @param min Minimum range of integers to accept (inclusive)
  * @return Integer above the minimum (inclusive)
  */
-int validateInput(int min, string prompt) {
+int validate_input(int min, string prompt) {
     int input;
     do {
         cout << prompt << endl;
@@ -253,8 +254,17 @@ int validateInput(int min, string prompt) {
 }
 
 //add new goats by creating a new list and merging with existing list, using std::merge
-void add_multiple(list<Goat> &trip, int num) {
-
+void add_multiple(list<Goat> &trip, string names[], string colors[]) {
+    int num = validate_input(1, "Enter the number of goats to add:");
+    list<Goat> newGoats(num);
+    for (Goat& goat : newGoats) {
+        goat.set_age(rand() % MAX_AGE);
+        goat.set_name(names[rand() % SZ_NAMES]);
+        goat.set_color(colors[rand() % SZ_COLORS]);
+    }
+    sort(trip.begin(), trip.end());
+    sort(newGoats.begin(), newGoats.end());
+    merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), trip.begin());
 }
 
 //sort goats by age using std::sort
