@@ -39,7 +39,7 @@ void age(list<Goat> &trip);
 //removes all goats above specified age from the trip using std::remove_if
 void retire_goats(list<Goat> &trip, int age);
 
-//renames all goats with duplicated names using std::unique
+//removes all goats with duplicated names using std::unique
 void name_unique(list<Goat> &trip);
 
 int main() {
