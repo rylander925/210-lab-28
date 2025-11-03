@@ -170,6 +170,9 @@ int main_menu() {
 }
 
 void delete_goat(list<Goat> &trip) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to remove" << endl; return; }
+
     cout << "DELETE A GOAT\n";
     int index = select_goat(trip);
     auto it = trip.begin();
@@ -189,6 +192,9 @@ void add_goat(list<Goat> &trip, string nms[], string cls[]) {
 }
 
 void display_trip(list<Goat> trp) {
+    //return and output error message if list is empty
+    if (trp.empty()) { cout << "No goats." << endl; return; }
+
     int i = 1;
     for (auto gt: trp)
         cout << "\t" 
@@ -300,6 +306,9 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
  * @param trip List of goats
  */
 void total_age(const list<Goat> &trip) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to age" << endl; return; }
+
     //uses accumulate with lambda function that adds age to an accumulator
     cout << "Total age of all goats: " << accumulate(trip.begin(), trip.end(), 0, [](int a, Goat goat) { return a + goat.get_age(); }) << endl;
 }
@@ -309,6 +318,9 @@ void total_age(const list<Goat> &trip) {
  * @param trip List of goats
  */
 void exists_older_than(const list<Goat> &trip) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to find" << endl; return; }
+
     //retrieves age from input as a nonnegative number
     int age = validate_input(0, "Enter age to search for:");
     
@@ -328,6 +340,9 @@ void exists_older_than(const list<Goat> &trip) {
  * @param trip List of goats
  */
 void find_name(const list<Goat> &trip) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to find" << endl; return; }
+
     //Retrieve name from input
     string name;
     cout << "Enter a name to search for:\n < ";
@@ -352,6 +367,9 @@ void find_name(const list<Goat> &trip) {
  * @param colors Array of colors to dye goats
  */
 void dye_goats(list<Goat> &trip, string colors[]) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to dye" << endl; return; }
+
     //call for_each with a function that sets each goat to a random color
     for_each(trip.begin(), trip.end(), [colors](Goat& goat) { goat.set_color(colors[rand() % SZ_COLORS]); });
 }
@@ -361,6 +379,9 @@ void dye_goats(list<Goat> &trip, string colors[]) {
  * @param trip List of goats
  */
 void age_goats(list<Goat> &trip) {
+    //return and output error message if list is empty
+    if (trip.empty()) { cout << "No goats to age" << endl; return; }
+
     //call transform with a function that increments each goat, placing elements back into original list
     transform(trip.begin(), trip.end(), trip.begin(), [](Goat& goat) { goat.set_age(goat.get_age() + 1); return goat; });
 }
@@ -370,6 +391,9 @@ void age_goats(list<Goat> &trip) {
  * @param trip List of goats
  */
 void retire_goats(list<Goat> &trip) {
+    //return if list is empty
+    if (trip.empty()) { cout << "No goats to retire" << endl; return; }
+
     //Retrieve minimum retirement age from input as a nonnegative number
     int retirementAge = validate_input(0, "Enter minimum retirement age:");
 
