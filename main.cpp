@@ -37,7 +37,7 @@ void dye_goats(list<Goat> &trip);
 void age_goats(list<Goat> &trip);
 
 //removes all goats above specified age from the trip using std::remove_if
-void retire_goats(list<Goat> &trip, int age);
+void retire_goats(list<Goat> &trip);
 
 //removes all goats with duplicated names using std::unique
 void unique_names(list<Goat> &trip);
@@ -196,3 +196,27 @@ int select_goat(list<Goat> trp) {
     }
     return input;
 }
+
+//add new goats by creating a new list and merging with existing list, using std::merge
+void add_multiple(list<Goat> &trip, int num);
+
+//sort goats by age using std::sort
+void sort_age(list<Goat> &trip);
+
+//checks if there is a goat older than the specified age
+bool exists_older_than(const list<Goat> &trip, int age);
+
+//finds a goat with the specified name, using std::find_if
+Goat find_name(const list<Goat> &trip, string name);
+
+//changes colors of all goats using std::for_each
+void dye_goats(list<Goat> &trip);
+
+//increments ages of all goats using std::transform
+void age_goats(list<Goat> &trip);
+
+//removes all goats above specified age from the trip using std::remove_if
+void retire_goats(list<Goat> &trip, int age);
+
+//removes all goats with duplicated names using std::unique
+void unique_names(list<Goat> &trip);
