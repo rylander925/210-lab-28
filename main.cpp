@@ -5,6 +5,7 @@ IDE Used: Visual Studio Code
 
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include <fstream>
 #include <iomanip>
 #include <list>
@@ -76,7 +77,7 @@ int main() {
         trip.push_back(tmp);
     }
 
-    sort(trip.begin(), trip.end());
+   // sort(trip.begin(), trip.end());
     
     enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, SORT_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
@@ -101,23 +102,23 @@ int main() {
                 break;
             case SORT_AGE:
                 cout << "Sorting goats by age. \n";
-                sort_age(trip);
+                //sort_age(trip);
                 break;
             case EXISTS_OLDER:
                 cout << "Seeing if a goat above a specified age exists. \n";
-                exists_older_than(trip);
+                //exists_older_than(trip);
                 break;
             case FIND:
                 cout << "Finding goat of a specify name.\n";
-                find_name(trip);
+                //find_name(trip);
                 break;
             case DYE:
                 cout << "Recoloring all goats. \n";
-                dye_goats(trip);
+                //dye_goats(trip);
                 break;
             case AGE:
                 cout << "Incrementing age of all goats. \n";
-                age_goats(trip);
+                //age_goats(trip);
                 break;
             case RETIRE:
                 cout << "Removing goats above specified age from the trip. \n";
@@ -125,7 +126,7 @@ int main() {
                 break;
             case UNIQUE_NAMES:
                 cout << "Removing all goats with duplicate names. \n";
-                unique_names(trip);
+                //unique_names(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -272,30 +273,30 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
     }
 
     //sort new list and existing list
-    sort(trip.begin(), trip.end());
-    sort(newGoats.begin(), newGoats.end());
+   // sort(trip.begin(), trip.end());
+    //sort(newGoats.begin(), newGoats.end());
 
     //merge both lists into the existing list
     //merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), trip.begin());
 }
 
 //sort goats by age using std::sort
-void sort_age(list<Goat> &trip);
+//void sort_age(list<Goat> &trip);
 
 //checks if there is a goat older than the specified age
-bool exists_older_than(const list<Goat> &trip, int age);
+//bool exists_older_than(const list<Goat> &trip, int age);
 
 //finds a goat with the specified name, using std::find_if
-Goat find_name(const list<Goat> &trip, string name);
+//Goat find_name(const list<Goat> &trip, string name);
 
 //changes colors of all goats using std::for_each
-void dye_goats(list<Goat> &trip);
+//void dye_goats(list<Goat> &trip);
 
 //increments ages of all goats using std::transform
-void age_goats(list<Goat> &trip);
+//void age_goats(list<Goat> &trip);
 
 //removes all goats above specified age from the trip using std::remove_if
-void retire_goats(list<Goat> &trip, int age);
+//void retire_goats(list<Goat> &trip, int age);
 
 //removes all goats with duplicated names using std::unique
-void unique_names(list<Goat> &trip);
+//void unique_names(list<Goat> &trip);
