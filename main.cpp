@@ -34,7 +34,7 @@ Goat find_name(const list<Goat> &trip, string name);
 void dye_goats(list<Goat> &trip);
 
 //increments ages of all goats using std::transform
-void age(list<Goat> &trip);
+void age_goats(list<Goat> &trip);
 
 //removes all goats above specified age from the trip using std::remove_if
 void retire_goats(list<Goat> &trip, int age);
@@ -97,13 +97,29 @@ int main() {
                 sort_age(trip);
                 break;
             case EXISTS_OLDER:
+                cout << "Seeing if a goat above a specified age exists. \n";
                 exists_older_than(trip);
                 break;
             case FIND:
+                cout << "Finding goat of a specify name.\n";
                 find_name(trip);
                 break;
             case DYE:
+                cout << "Recoloring all goats. \n";
                 dye_goats(trip);
+                break;
+            case AGE:
+                cout << "Incrementing age of all goats. \n";
+                age_goats(trip);
+                break;
+            case RETIRE:
+                cout << "Removing goats above specified age from the trip. \n";
+                retire_goats(trip);
+                break;
+            case UNIQUE_NAMES:
+                cout << "Removing all goats with duplicate names. \n";
+                unique_names(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
