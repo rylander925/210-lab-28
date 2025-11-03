@@ -35,7 +35,7 @@ void exists_older_than(const list<Goat> &trip);
 void find_name(const list<Goat> &trip);
 
 //changes colors of all goats using std::for_each
-void dye_goats(list<Goat> &trip);
+void dye_goats(list<Goat> &trip, string colors[]);
 
 //increments ages of all goats using std::transform
 void age_goats(list<Goat> &trip);
@@ -114,7 +114,7 @@ int main() {
                 break;
             case DYE:
                 cout << "Recoloring all goats. \n";
-                //dye_goats(trip);
+                dye_goats(trip, colors);
                 break;
             case AGE:
                 cout << "Incrementing age of all goats. \n";
@@ -348,8 +348,15 @@ void find_name(const list<Goat> &trip) {
     }
 }
 
-//changes colors of all goats using std::for_each
-//void dye_goats(list<Goat> &trip);
+/** 
+ * Changes colors of all goats using std::for_each
+ * @param trip List of goats
+ * @param colors Array of colors to dye goats
+ */
+void dye_goats(list<Goat> &trip, string colors[]) {
+    //call for_each with a function that sets each goat to a random color
+    for_each(trip.begin(), trip.end(), [colors](Goat& goat) { goat.set_color(colors[rand() % SZ_COLORS]); });
+}
 
 //increments ages of all goats using std::transform
 //void age_goats(list<Goat> &trip);
