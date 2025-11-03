@@ -18,6 +18,15 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
+//add new goats by creating a new list and merging with existing list, using std::merge
+void add_multiple(list<Goat> &trip, int num);
+
+//sort goats by age using std::sort
+void sort_age(list<Goat> &trip);
+
+//checks if there is a goat older than the specified age
+bool exists_older_than(const list<Goat> &trip, int age);
+
 int main() {
     srand(time(0));
     bool again;
