@@ -122,7 +122,7 @@ int main() {
                 break;
             case RETIRE:
                 cout << "Removing goats above specified age from the trip. \n";
-                retire_goats(trip);
+                //retire_goats(trip);
                 break;
             case UNIQUE_NAMES:
                 cout << "Removing all goats with duplicate names. \n";
@@ -241,7 +241,7 @@ int validate_input(int min, string prompt) {
     int input;
     do {
         cout << prompt << endl;
-        cout << " < ";
+        cout << " > ";
         cin >> input;
 
         if (cin.fail()) {
@@ -273,11 +273,13 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
     }
 
     //sort new list and existing list
-   // sort(trip.begin(), trip.end());
-    //sort(newGoats.begin(), newGoats.end());
+    trip.sort();
+    newGoats.sort();
 
     //merge both lists into the existing list
-    //merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), trip.begin());
+    list<Goat> newList(trip.size() + newGoats.size());
+    merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), newList.begin());
+    trip = newList;
 }
 
 //sort goats by age using std::sort
