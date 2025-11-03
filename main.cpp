@@ -22,28 +22,13 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
-//add new goats by creating a new list and merging with existing list, using std::merge
 void add_multiple(list<Goat> &trip, string names[], string colors[]);
-
-//find total age of all goats usign std::accumulate
 void total_age(const list<Goat> &trip);
-
-//checks if there is a goat older than the specified age
 void exists_older_than(const list<Goat> &trip);
-
-//finds a goat with the specified name, using std::find_if
 void find_name(const list<Goat> &trip);
-
-//changes colors of all goats using std::for_each
 void dye_goats(list<Goat> &trip, string colors[]);
-
-//increments ages of all goats using std::transform
 void age_goats(list<Goat> &trip);
-
-//removes all goats above specified age from the trip using std::remove_if
 void retire_goats(list<Goat> &trip);
-
-//removes all goats with duplicated names using std::unique
 void unique_names(list<Goat> &trip);
 
 int validate_input(int min, int max, string prompt);
