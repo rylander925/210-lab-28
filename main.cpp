@@ -118,7 +118,7 @@ int main() {
                 break;
             case AGE:
                 cout << "Incrementing age of all goats. \n";
-                //age_goats(trip);
+                age_goats(trip);
                 break;
             case RETIRE:
                 cout << "Removing goats above specified age from the trip. \n";
@@ -358,8 +358,14 @@ void dye_goats(list<Goat> &trip, string colors[]) {
     for_each(trip.begin(), trip.end(), [colors](Goat& goat) { goat.set_color(colors[rand() % SZ_COLORS]); });
 }
 
-//increments ages of all goats using std::transform
-//void age_goats(list<Goat> &trip);
+/**
+ * Increments ages of all goats using std::transform
+ * @param trip List of goats
+ */
+void age_goats(list<Goat> &trip) {
+    //call transform with a function that increments each goat, placing elements back into original list
+    transform(trip.begin(), trip.end(), trip.begin(), [](Goat& goat) { goat.set_age(goat.get_age() + 1); return goat; });
+}
 
 //removes all goats above specified age from the trip using std::remove_if
 //void retire_goats(list<Goat> &trip, int age);
