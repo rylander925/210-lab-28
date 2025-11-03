@@ -40,7 +40,7 @@ void age(list<Goat> &trip);
 void retire_goats(list<Goat> &trip, int age);
 
 //removes all goats with duplicated names using std::unique
-void name_unique(list<Goat> &trip);
+void unique_names(list<Goat> &trip);
 
 int main() {
     srand(time(0));
@@ -71,22 +71,39 @@ int main() {
         trip.push_back(tmp);
     }
     
+    enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, SORT_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != EXIT) {
         switch (sel) {
-            case 1:
+            case ADD:
                 cout << "Adding a goat.\n";
                 add_goat(trip, names, colors);
                 break;
-            case 2:    
+            case REMOVE:    
                 cout << "Removing a goat.\n";
                 delete_goat(trip);
                 break;
-            case 3:    
+            case DISPLAY:    
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+            case ADD_MULTIPLE:
+                cout << "Adding new goats to the trip.\n";
+                add_multiple(trip);
+                break;
+            case SORT_AGE:
+                cout << "Sorting goats by age. \n";
+                sort_age(trip);
+                break;
+            case EXISTS_OLDER:
+                exists_older_than(trip);
+                break;
+            case FIND:
+                find_name(trip);
+                break;
+            case DYE:
+                dye_goats(trip);
             default:
                 cout << "Invalid selection.\n";
                 break;
