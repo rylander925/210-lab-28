@@ -21,7 +21,7 @@ void display_trip(list<Goat> trip);
 int main_menu();
 
 //add new goats by creating a new list and merging with existing list, using std::merge
-void add_multiple(list<Goat> &trip, string[] names, string[] colors);
+void add_multiple(list<Goat> &trip, string names[], string colors[]);
 
 //sort goats by age using std::sort
 void sort_age(list<Goat> &trip);
@@ -75,6 +75,8 @@ int main() {
         Goat tmp(name, age, color);
         trip.push_back(tmp);
     }
+
+    sort(trip.begin(), trip.end());
     
     enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, SORT_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
@@ -95,7 +97,7 @@ int main() {
                 break;
             case ADD_MULTIPLE:
                 cout << "Adding new goats to the trip.\n";
-                add_multiple(trip);
+                add_multiple(trip, names, colors);
                 break;
             case SORT_AGE:
                 cout << "Sorting goats by age. \n";
@@ -255,16 +257,26 @@ int validate_input(int min, string prompt) {
 
 //add new goats by creating a new list and merging with existing list, using std::merge
 void add_multiple(list<Goat> &trip, string names[], string colors[]) {
+    //retrieve number of goats from input
     int num = validate_input(1, "Enter the number of goats to add:");
-    list<Goat> newGoats(num);
-    for (Goat& goat : newGoats) {
-        goat.set_age(rand() % MAX_AGE);
-        goat.set_name(names[rand() % SZ_NAMES]);
-        goat.set_color(colors[rand() % SZ_COLORS]);
+
+    //fill a new list of goats
+    list<Goat> newGoats;
+    int age;
+    string name, color;
+    for (int i = 0; i < num; i++) {
+        age = rand() % MAX_AGE;
+        name = names[rand() % SZ_NAMES];
+        color = colors[rand() % SZ_COLORS];
+        newGoats.push_back(Goat(name, age, color));
     }
+
+    //sort new list and existing list
     sort(trip.begin(), trip.end());
     sort(newGoats.begin(), newGoats.end());
-    merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), trip.begin());
+
+    //merge both lists into the existing list
+    //merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), trip.begin());
 }
 
 //sort goats by age using std::sort
