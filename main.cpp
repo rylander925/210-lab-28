@@ -27,6 +27,11 @@ void sort_age(list<Goat> &trip);
 //checks if there is a goat older than the specified age
 bool exists_older_than(const list<Goat> &trip, int age);
 
+//finds a goat with the specified name, using std::find_if
+Goat find_name(const list<Goat> &trip, string name);
+
+void dye_goats(list<Goat> &trip);
+
 int main() {
     srand(time(0));
     bool again;
