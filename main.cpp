@@ -30,7 +30,17 @@ bool exists_older_than(const list<Goat> &trip, int age);
 //finds a goat with the specified name, using std::find_if
 Goat find_name(const list<Goat> &trip, string name);
 
+//changes colors of all goats using std::for_each
 void dye_goats(list<Goat> &trip);
+
+//increments ages of all goats using std::transform
+void age(list<Goat> &trip);
+
+//removes all goats above specified age from the trip using std::remove_if
+void retire_goats(list<Goat> &trip, int age);
+
+//renames all goats with duplicated names using std::unique
+void name_unique(list<Goat> &trip);
 
 int main() {
     srand(time(0));
