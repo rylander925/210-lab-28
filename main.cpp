@@ -78,7 +78,6 @@ int main() {
         trip.push_back(tmp);
     }
 
-   // sort(trip.begin(), trip.end());
     
     enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, ADD_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
@@ -111,7 +110,7 @@ int main() {
                 break;
             case FIND:
                 cout << "Finding goat of a specify name.\n";
-                //find_name(trip);
+                find_name(trip);
                 break;
             case DYE:
                 cout << "Recoloring all goats. \n";
@@ -319,8 +318,29 @@ void exists_older_than(const list<Goat> &trip) {
     }
 }
 
-//finds a goat with the specified name, using std::find_if
-//Goat find_name(const list<Goat> &trip, string name);
+/**
+ * Finds a goat with an input specified name, using std::find_if
+ * @param trip List of goats
+ */
+void find_name(const list<Goat> &trip) {
+    //Retrieve name from input
+    string name;
+    cout << "Enter a name to search for:\n < ";
+    cin.ignore();
+    getline(cin, name);
+
+    //Search for name using find_if
+    auto it = find_if(trip.begin(), trip.end(), [name](Goat goat) { return goat.get_name() == name; });
+
+    //Output info if found, or an error message if not
+    if (it != trip.end()) {
+        cout << "A goat was found with name " << name << endl;
+        cout << "Age: " << it->get_age() << endl;
+        cout << "Color: " << it->get_color() << endl;
+    } else {
+        cout << "No goat was found with name " << name << endl;
+    }
+}
 
 //changes colors of all goats using std::for_each
 //void dye_goats(list<Goat> &trip);
