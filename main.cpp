@@ -11,6 +11,7 @@ IDE Used: Visual Studio Code
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
+const int STREAM_IGNORE_CHARS = 100;
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -25,10 +26,10 @@ void add_multiple(list<Goat> &trip, int num);
 void sort_age(list<Goat> &trip);
 
 //checks if there is a goat older than the specified age
-bool exists_older_than(const list<Goat> &trip, int age);
+bool exists_older_than(const list<Goat> &trip);
 
 //finds a goat with the specified name, using std::find_if
-Goat find_name(const list<Goat> &trip, string name);
+Goat find_name(const list<Goat> &trip);
 
 //changes colors of all goats using std::for_each
 void dye_goats(list<Goat> &trip);
@@ -41,6 +42,9 @@ void retire_goats(list<Goat> &trip);
 
 //removes all goats with duplicated names using std::unique
 void unique_names(list<Goat> &trip);
+
+int validateInput(int min, int max, string prompt);
+int validateInput(int min, string prompt);
 
 int main() {
     srand(time(0));
@@ -197,8 +201,61 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
+/**
+ * Retrieves an integer in specified range from console input
+ * @param prompt String to display before prompting input
+ * @param min Minimum range of integers to accept (inclusive)
+ * @param max Maximum range of integers to accept (inclusive)
+ * @return Integer in the range of min, max inclusive
+ */
+int validateInput(int min, int max, string prompt) {
+    int input;
+    do {
+        cout << prompt << endl;
+        cout << " < ";
+        cin >> input;
+
+        if (cin.fail()) {
+            cout << "Input must be an integer" << endl;
+            input = min - 1;
+        } else if (input < min || input > max) {
+            cout << "Input must be between " << min << " and " << max << endl;
+        }
+        cin.clear();
+        cin.ignore(STREAM_IGNORE_CHARS, '\n');
+    } while (input < min || input > max);
+    return input;
+}
+
+/**
+ * Retrieves an integer above the specified minimum from console input
+ * @param prompt String to display before prompting input
+ * @param min Minimum range of integers to accept (inclusive)
+ * @return Integer above the minimum (inclusive)
+ */
+int validateInput(int min, string prompt) {
+    int input;
+    do {
+        cout << prompt << endl;
+        cout << " < ";
+        cin >> input;
+
+        if (cin.fail()) {
+            cout << "Input must be an integer" << endl;
+            input = min - 1;
+        } else if (input < min) {
+            cout << "Input must be greater than " << min << endl;
+        }
+        cin.clear();
+        cin.ignore(STREAM_IGNORE_CHARS, '\n');
+    } while (input < min);
+    return input;
+}
+
 //add new goats by creating a new list and merging with existing list, using std::merge
-void add_multiple(list<Goat> &trip, int num);
+void add_multiple(list<Goat> &trip, int num) {
+
+}
 
 //sort goats by age using std::sort
 void sort_age(list<Goat> &trip);
