@@ -109,7 +109,7 @@ int main() {
                 exists_older_than(trip);
                 break;
             case FIND:
-                cout << "Finding goat of a specify name.\n";
+                cout << "Finding goat of a specified name.\n";
                 find_name(trip);
                 break;
             case DYE:
@@ -158,9 +158,16 @@ int main_menu() {
     int choice;
     cin >> choice;
     while (choice < 1 || choice > 12) {
+        if (cin.fail()) {
+            choice = -1;
+            cin.clear();
+            cin.ignore(STREAM_IGNORE_CHARS, '\n');
+        }
         cout << "Invalid, again --> ";
         cin >> choice;
     }
+    //clear stream for subsequent getlines
+    cin.ignore(STREAM_IGNORE_CHARS, '\n');
     return choice;
 }
 
@@ -326,7 +333,6 @@ void find_name(const list<Goat> &trip) {
     //Retrieve name from input
     string name;
     cout << "Enter a name to search for:\n < ";
-    cin.ignore();
     getline(cin, name);
 
     //Search for name using find_if
