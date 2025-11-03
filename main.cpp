@@ -29,10 +29,10 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]);
 void total_age(const list<Goat> &trip);
 
 //checks if there is a goat older than the specified age
-bool exists_older_than(const list<Goat> &trip);
+void exists_older_than(const list<Goat> &trip);
 
 //finds a goat with the specified name, using std::find_if
-Goat find_name(const list<Goat> &trip);
+void find_name(const list<Goat> &trip);
 
 //changes colors of all goats using std::for_each
 void dye_goats(list<Goat> &trip);
@@ -107,7 +107,7 @@ int main() {
                 break;
             case EXISTS_OLDER:
                 cout << "Seeing if a goat above a specified age exists. \n";
-                //exists_older_than(trip);
+                exists_older_than(trip);
                 break;
             case FIND:
                 cout << "Finding goat of a specify name.\n";
@@ -296,11 +296,28 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
  * @param trip List of goats
  */
 void total_age(const list<Goat> &trip) {
+    //uses accumulate with lambda function that adds age to an accumulator
     cout << "Total age of all goats: " << accumulate(trip.begin(), trip.end(), 0, [](int a, Goat goat) { return a + goat.get_age(); }) << endl;
 }
 
-//checks if there is a goat older than the specified age
-//bool exists_older_than(const list<Goat> &trip, int age);
+/**
+ * Checks if there is a goat older than an age received from input (exclusive)
+ * @param trip List of goats
+ */
+void exists_older_than(const list<Goat> &trip) {
+    //retrieves age from input as a nonnegative number
+    int age = validate_input(0, "Enter age to search for:");
+    
+    //calls any_of to with function that checks if a goat's age is above (not equal to) input age
+    bool exists = any_of(trip.begin(), trip.end(), [age](Goat goat) { return goat.get_age() > age; });
+
+    //outputs message accordingly if a goat is/ is not found
+    if (exists) {
+        cout << "There is a goat older than " << age << " years old (exclusive)" << endl;
+    } else {
+        cout << "There is not a goat older than " << age << " years old (exclusive)" << endl;
+    }
+}
 
 //finds a goat with the specified name, using std::find_if
 //Goat find_name(const list<Goat> &trip, string name);
