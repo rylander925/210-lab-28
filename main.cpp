@@ -4,6 +4,7 @@ IDE Used: Visual Studio Code
 */
 
 #include <iostream>
+#include <numeric>
 #include <algorithm>
 #include <string>
 #include <fstream>
@@ -132,10 +133,10 @@ int main() {
                 cout << "Invalid selection.\n";
                 break;
         }
-        sel = main_menu();
         trip.sort();
+        cout << endl;
+        sel = main_menu();
     }
-    
 
     return 0;
 }
@@ -290,9 +291,12 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
     trip = mergedTrip;
 }
 
-//sum ages
-void total_age(list<Goat> &trip) {
-    int age = std::accumulate(trip.begin(), trip.end(), 0, [](int acc, Goat* goat) { acc + goat->get_age(); });
+/**
+ * Sums the ages of all goats using std::accumulate
+ * @param trip List of goats
+ */
+void total_age(const list<Goat> &trip) {
+    cout << "Total age of all goats: " << accumulate(trip.begin(), trip.end(), 0, [](int a, Goat goat) { return a + goat.get_age(); }) << endl;
 }
 
 //checks if there is a goat older than the specified age
