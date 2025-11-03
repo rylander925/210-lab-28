@@ -136,11 +136,19 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Add a number of random goats\n";
+    cout << "[5] Sort goats by age\n";
+    cout << "[6] See whether there is a goat older than a given age\n";
+    cout << "[7] Find information of a goat\n";
+    cout << "[8] Recolor all goats\n";
+    cout << "[9] Age all goats by one year\n";
+    cout << "[10] Retire goats above a certain age\n";
+    cout << "[11] Remove goats with duplicated names\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
