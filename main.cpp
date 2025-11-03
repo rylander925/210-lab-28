@@ -78,7 +78,6 @@ int main() {
         trip.push_back(tmp);
     }
 
-    
     enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, ADD_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
     int sel = main_menu();
@@ -122,7 +121,7 @@ int main() {
                 break;
             case RETIRE:
                 cout << "Removing goats above specified age from the trip. \n";
-                //retire_goats(trip);
+                retire_goats(trip);
                 break;
             case UNIQUE_NAMES:
                 cout << "Removing all goats with duplicate names. \n";
@@ -136,7 +135,6 @@ int main() {
         cout << endl;
         sel = main_menu();
     }
-
     return 0;
 }
 
@@ -367,8 +365,17 @@ void age_goats(list<Goat> &trip) {
     transform(trip.begin(), trip.end(), trip.begin(), [](Goat& goat) { goat.set_age(goat.get_age() + 1); return goat; });
 }
 
-//removes all goats above specified age from the trip using std::remove_if
-//void retire_goats(list<Goat> &trip, int age);
+/**
+ * Removes all goats above specified age from the trip using std::remove_if
+ * @param trip List of goats
+ */
+void retire_goats(list<Goat> &trip) {
+    //Retrieve minimum retirement age from input as a nonnegative number
+    int retirementAge = validate_input(0, "Enter minimum retirement age:");
+
+    //Remove using erase and remove_if
+    trip.erase(remove_if(trip.begin(), trip.end(), [retirementAge](Goat goat) { return goat.get_age() >= retirementAge; }), trip.end());
+}
 
 //removes all goats with duplicated names using std::unique
 //void unique_names(list<Goat> &trip);
