@@ -24,8 +24,8 @@ int main_menu();
 //add new goats by creating a new list and merging with existing list, using std::merge
 void add_multiple(list<Goat> &trip, string names[], string colors[]);
 
-//sort goats by age using std::sort
-void sort_age(list<Goat> &trip);
+//find total age of all goats usign std::accumulate
+void total_age(const list<Goat> &trip);
 
 //checks if there is a goat older than the specified age
 bool exists_older_than(const list<Goat> &trip);
@@ -79,7 +79,7 @@ int main() {
 
    // sort(trip.begin(), trip.end());
     
-    enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, SORT_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
+    enum MENU_OPTIONS {ADD = 1, REMOVE = 2, DISPLAY = 3, ADD_MULTIPLE = 4, ADD_AGE = 5, EXISTS_OLDER = 6, FIND = 7, DYE = 8, AGE = 9, RETIRE = 10, UNIQUE_NAMES = 11, EXIT = 12};
     // Goat Manager 3001 Engine
     int sel = main_menu();
     while (sel != EXIT) {
@@ -100,9 +100,9 @@ int main() {
                 cout << "Adding new goats to the trip.\n";
                 add_multiple(trip, names, colors);
                 break;
-            case SORT_AGE:
-                cout << "Sorting goats by age. \n";
-                //sort_age(trip);
+            case ADD_AGE:
+                cout << "Adding ages of all goats. \n";
+                total_age(trip);
                 break;
             case EXISTS_OLDER:
                 cout << "Seeing if a goat above a specified age exists. \n";
@@ -133,6 +133,7 @@ int main() {
                 break;
         }
         sel = main_menu();
+        trip.sort();
     }
     
 
@@ -145,7 +146,7 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Add a number of random goats\n";
-    cout << "[5] Sort goats by age\n";
+    cout << "[5] Find total age of all goats\n";
     cout << "[6] See whether there is a goat older than a given age\n";
     cout << "[7] Find information of a goat\n";
     cout << "[8] Recolor all goats\n";
@@ -256,7 +257,12 @@ int validate_input(int min, string prompt) {
     return input;
 }
 
-//add new goats by creating a new list and merging with existing list, using std::merge
+/**
+ * Add new goats by creating a new list and merging with existing list, using std::merge
+ * @param trip List of goats to add to
+ * @param names Array of names to retrieve new goat names from
+ * @param colors Array of colors to retrieve new goat colors from
+ */
 void add_multiple(list<Goat> &trip, string names[], string colors[]) {
     //retrieve number of goats from input
     int num = validate_input(1, "Enter the number of goats to add:");
@@ -276,14 +282,18 @@ void add_multiple(list<Goat> &trip, string names[], string colors[]) {
     trip.sort();
     newGoats.sort();
 
-    //merge both lists into the existing list
-    list<Goat> newList(trip.size() + newGoats.size());
-    merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), newList.begin());
-    trip = newList;
+    //merge both lists into a new temp list
+    list<Goat> mergedTrip(trip.size() + newGoats.size());
+    merge(trip.begin(), trip.end(), newGoats.begin(), newGoats.end(), mergedTrip.begin());
+
+    //copy the new list to the existing list
+    trip = mergedTrip;
 }
 
-//sort goats by age using std::sort
-//void sort_age(list<Goat> &trip);
+//sum ages
+void total_age(list<Goat> &trip) {
+    int age = std::accumulate(trip.begin(), trip.end(), 0, [](int acc, Goat* goat) { acc + goat->get_age(); });
+}
 
 //checks if there is a goat older than the specified age
 //bool exists_older_than(const list<Goat> &trip, int age);
